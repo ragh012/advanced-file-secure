@@ -157,21 +157,36 @@ def decrypt_data(bundle: bytes, password: str):
 
 st.set_page_config(page_title="Advanced File Secure", page_icon="🔐")
 
-st.title("🔐 Advanced File Secure v2")
+# --- UI ---
+st.set_page_config(page_title="Advanced File Secure", page_icon="🔐")
 
+# --- HEADER ---
 st.markdown("""
-### 🎓 IIT Jammu Winter Internship Submission
+<h1 style='text-align: center;'>🔐 Advanced File Secure v2</h1>
 
-Secure file encryption tool using **AES-256-GCM (Authenticated Encryption)**  
-and **Argon2id key derivation** for strong password-based security.
-
-Designed to ensure **confidentiality, integrity, and tamper detection**.
-""")
+<div style='
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #f0f2f6;
+    margin-bottom: 20px;
+'>
+    <h4>🎓 IIT Jammu Winter Internship Submission</h4>
+    <p>
+    Secure file encryption using <b>AES-256-GCM</b> and <b>Argon2id</b><br>
+    Ensuring confidentiality, integrity, and tamper detection
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown(
-    "**AES-256-GCM** encryption · **Argon2id** key derivation · "
-    "Filename preservation · Large-file safe · Authenticated integrity"
+    "<p style='text-align: center;'>"
+    "AES-256-GCM · Argon2id · Filename Preservation · Authenticated Integrity"
+    "</p>",
+    unsafe_allow_html=True
 )
+
+st.divider()
 tab1, tab2 = st.tabs(["🔒 Encrypt", "🔓 Decrypt"])
 
 # ── ENCRYPT TAB ──────────────────────────────────────────────────────────────

@@ -57,7 +57,7 @@ This application allows users to encrypt sensitive files before storing or shari
 ### 1. Clone the repository
 
 ```
-git clone https://github.com/your-username/advanced-file-secure.git
+git clone https://github.com/ragh012/advanced-file-secure.git
 cd advanced-file-secure
 ```
 

@@ -158,11 +158,20 @@ def decrypt_data(bundle: bytes, password: str):
 st.set_page_config(page_title="Advanced File Secure", page_icon="🔐")
 
 st.title("🔐 Advanced File Secure v2")
+
+st.markdown("""
+### 🎓 IIT Jammu Winter Internship Submission
+
+Secure file encryption tool using **AES-256-GCM (Authenticated Encryption)**  
+and **Argon2id key derivation** for strong password-based security.
+
+Designed to ensure **confidentiality, integrity, and tamper detection**.
+""")
+
 st.markdown(
     "**AES-256-GCM** encryption · **Argon2id** key derivation · "
     "Filename preservation · Large-file safe · Authenticated integrity"
 )
-
 tab1, tab2 = st.tabs(["🔒 Encrypt", "🔓 Decrypt"])
 
 # ── ENCRYPT TAB ──────────────────────────────────────────────────────────────

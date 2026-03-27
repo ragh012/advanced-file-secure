@@ -84,6 +84,8 @@ streamlit run app.py
 
 ## 🔐 How It Works
 
+
+
 ### 1. Key Derivation
 
 * Password → Argon2id → 256-bit encryption key
@@ -118,6 +120,10 @@ streamlit run app.py
 ---
 
 ## 🔒 Security Design Decisions
+
+This project prioritizes strong cryptographic design (Argon2id + AES-GCM) as the core security layer, with UI kept minimal and extensible for future enhancements.
+
+This design follows a security-first approach, where correctness and cryptographic robustness are prioritized over surface-level features.
 
 ### ✅ Why AES-GCM?
 

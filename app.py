@@ -154,25 +154,23 @@ def decrypt_data(bundle: bytes, password: str):
 
 
 # --- STREAMLIT UI ---
-
-st.set_page_config(page_title="Advanced File Secure", page_icon="🔐")
-
-# --- UI ---
 st.set_page_config(page_title="Advanced File Secure", page_icon="🔐")
 
 # --- HEADER ---
 st.markdown("""
-<h1 style='text-align: center;'>🔐 Advanced File Secure v2</h1>
+<h1 style='text-align: center; color:#2c3e50;'>🔐 Advanced File Secure v2</h1>
 
 <div style='
     text-align: center;
-    padding: 12px;
-    border-radius: 10px;
-    background-color: #f0f2f6;
+    padding: 14px;
+    border-radius: 12px;
+    background-color: #f8fafc;
+    border: 1px solid #e6eaf1;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
     margin-bottom: 20px;
 '>
     <h4>🎓 IIT Jammu Winter Internship Submission</h4>
-    <p>
+    <p style="margin: 6px 0;">
     Secure file encryption using <b>AES-256-GCM</b> and <b>Argon2id</b><br>
     Ensuring confidentiality, integrity, and tamper detection
     </p>
@@ -180,13 +178,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown(
-    "<p style='text-align: center;'>"
+    "<p style='text-align: center; color:#555;'>"
     "AES-256-GCM · Argon2id · Filename Preservation · Authenticated Integrity"
     "</p>",
     unsafe_allow_html=True
 )
 
+st.markdown("<br>", unsafe_allow_html=True)
 st.divider()
+
 tab1, tab2 = st.tabs(["🔒 Encrypt", "🔓 Decrypt"])
 
 # ── ENCRYPT TAB ──────────────────────────────────────────────────────────────

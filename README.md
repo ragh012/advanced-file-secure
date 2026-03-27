@@ -77,8 +77,8 @@ streamlit run app.py
 
 ## 🌐 Live Demo
 
-*(Add after deployment)*
-👉 https://your-app-name.streamlit.app
+🚀 Try the app here:  
+👉 [https://advanced-file-secure.streamlit.app](https://advanced-file-secure.streamlit.app)
 
 ---
 
@@ -179,6 +179,7 @@ streamlit run app.py
 ## 👨‍💻 Author
 
 **Raghul M**
+
 ECE @ IIIT Manipur
 Cybersecurity & Systems Enthusiast
 

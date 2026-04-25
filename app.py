@@ -108,7 +108,6 @@ def decrypt_data(bundle: bytes, password: str):
     Returns (plaintext: bytes, original_filename: str) or raises.
     Raises ValueError on bad format, returns (None, None) on wrong password / tampered file.
     """
-    # Minimum: 4 (header) + 16 (salt) + 12 (nonce) + 2 (fname len) + 16 (GCM tag) = 50
     if len(bundle) < 50:
         raise ValueError("File is too short to be a valid encrypted bundle.")
 
@@ -139,7 +138,7 @@ def decrypt_data(bundle: bytes, password: str):
     ciphertext  = bundle[offset:]
 
     original_filename = fname_bytes.decode("utf-8", errors="replace")
-    header_aad        = bundle[:offset]   # everything before ciphertext
+    header_aad        = bundle[:offset]
 
     key = derive_key(password, salt)
     try:
@@ -153,38 +152,43 @@ def decrypt_data(bundle: bytes, password: str):
     return plaintext, original_filename
 
 
-# --- STREAMLIT UI ---
-st.set_page_config(page_title="Advanced File Secure", page_icon="🔐")
+# =============================================================================
+# STREAMLIT UI
+# =============================================================================
 
-# --- HEADER ---
+st.set_page_config(
+    page_title = "Advanced File Secure",
+    page_icon  = "🔐",
+    layout     = "centered"
+)
+
+# ── Header ────────────────────────────────────────────────────────────────────
 st.markdown("""
-<h1 style='text-align: center; color:#2c3e50;'>🔐 Advanced File Secure v2</h1>
-
+<h1 style='text-align:center; color:#2c3e50;'>🔐 Advanced File Secure v2</h1>
 <div style='
-    text-align: center;
-    padding: 14px;
-    border-radius: 12px;
-    background-color: #f8fafc;
-    border: 1px solid #e6eaf1;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
+    text-align:center; padding:14px; border-radius:10px;
+    background:#f8fafc; border:1px solid #e2e8f0;
+    box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:18px;
 '>
-    <h4>🎓 IIT Jammu Winter Internship Submission</h4>
-    <p style="margin: 6px 0;">
-    Secure file encryption using <b>AES-256-GCM</b> and <b>Argon2id</b><br>
-    Ensuring confidentiality, integrity, and tamper detection
+    <p style='margin:4px 0; font-size:0.95rem;'>
+        Secure file encryption using <b>AES-256-GCM</b> and <b>Argon2id</b><br>
+        Confidentiality · Integrity · Tamper Detection
+    </p>
+    <p style='margin:6px 0 2px; font-size:0.8rem; color:#64748b;'>
+        Raghul M &nbsp;·&nbsp; 230102052 &nbsp;·&nbsp; ECE Section C<br>
+        IIIT Senapati, Manipur &nbsp;·&nbsp; Guide: Dr. Enukonda Pothan
     </p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown(
-    "<p style='text-align: center; color:#555;'>"
-    "AES-256-GCM · Argon2id · Filename Preservation · Authenticated Integrity"
+    "<p style='text-align:center; color:#64748b; font-size:0.85rem;'>"
+    "AES-256-GCM &nbsp;·&nbsp; Argon2id &nbsp;·&nbsp; "
+    "Filename Preservation &nbsp;·&nbsp; Authenticated Integrity"
     "</p>",
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
-st.markdown("<br>", unsafe_allow_html=True)
 st.divider()
 
 tab1, tab2 = st.tabs(["🔒 Encrypt", "🔓 Decrypt"])
@@ -207,7 +211,7 @@ with tab1:
             <div style="margin-bottom:4px;font-size:0.85rem;">
                 Password strength: <b style="color:{bar_colors[score]}">{labels[score]}</b>
             </div>
-            <div style="background:#333;border-radius:4px;height:8px;width:100%;">
+            <div style="background:#e2e8f0;border-radius:4px;height:8px;width:100%;">
                 <div style="background:{bar_colors[score]};border-radius:4px;
                             height:8px;width:{(score+1)*20}%;transition:width .3s;"></div>
             </div>
@@ -218,7 +222,10 @@ with tab1:
             for tip in feedback:
                 st.caption(f"💡 {tip}")
         if not acceptable:
-            st.warning("Password must be ≥ 8 chars, contain an uppercase letter and a digit, and score **Strong** or better.")
+            st.warning(
+                "Password must be ≥ 8 chars, contain an uppercase letter "
+                "and a digit, and score **Strong** or better."
+            )
 
     if st.button("Encrypt & Download", key="enc_btn"):
         if not u_file:
@@ -232,7 +239,7 @@ with tab1:
             else:
                 with st.spinner("Encrypting… (Argon2id key derivation may take a moment)"):
                     u_file.seek(0)
-                    file_bytes    = u_file.read()
+                    file_bytes     = u_file.read()
                     encrypted_blob = encrypt_data(file_bytes, u_pass, u_file.name)
 
                 st.download_button(
@@ -241,7 +248,10 @@ with tab1:
                     file_name = f"{u_file.name}.enc",
                     mime      = "application/octet-stream",
                 )
-                st.success("✅ Encryption successful! Original filename is stored inside the bundle.")
+                st.success(
+                    "✅ Encryption successful! "
+                    "Original filename is stored inside the bundle."
+                )
 
 # ── DECRYPT TAB ──────────────────────────────────────────────────────────────
 with tab2:
@@ -264,7 +274,9 @@ with tab2:
                     plaintext, original_name = decrypt_data(enc_bytes, d_pass)
 
                     if plaintext is None:
-                        st.error("❌ Incorrect password or the file has been tampered with.")
+                        st.error(
+                            "❌ Incorrect password or the file has been tampered with."
+                        )
                     else:
                         st.download_button(
                             label     = f"⬇️ Download — {original_name}",
@@ -272,7 +284,10 @@ with tab2:
                             file_name = original_name,
                             mime      = "application/octet-stream",
                         )
-                        st.success(f"✅ File verified & decrypted! Recovered as **{original_name}**")
+                        st.success(
+                            f"✅ File verified & decrypted! "
+                            f"Recovered as **{original_name}**"
+                        )
 
                 except ValueError as ve:
                     st.error(f"Format error: {ve}")

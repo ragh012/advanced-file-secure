@@ -176,7 +176,7 @@ st.markdown("""
     </p>
     <p style='margin:6px 0 2px; font-size:0.8rem; color:#64748b;'>
         Raghul M &nbsp;·&nbsp; 230102052 &nbsp;·&nbsp; ECE Section C<br>
-        IIIT Senapati, Manipur &nbsp;·&nbsp; Guide: Dr. Enukonda Venkata Pothan
+        IIIT Senapati, Manipur &nbsp;·&nbsp;
     </p>
 </div>
 """, unsafe_allow_html=True)

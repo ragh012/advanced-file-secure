@@ -175,8 +175,8 @@ st.markdown("""
         Confidentiality · Integrity · Tamper Detection
     </p>
     <p style='margin:6px 0 2px; font-size:0.8rem; color:#64748b;'>
-        Raghul M &nbsp;·&nbsp; 230102052 &nbsp;·&nbsp; ECE Section C<br>
-        IIIT Senapati, Manipur &nbsp;·&nbsp;
+    Raghul M<br>
+    IIIT Senapati, Manipur
     </p>
 </div>
 """, unsafe_allow_html=True)
